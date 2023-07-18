@@ -1,1 +1,1 @@
-# GMTK_Golf
+# GMTK
