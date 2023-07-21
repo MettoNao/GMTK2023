@@ -15,6 +15,6 @@ public class PlayerHitEffect : MonoBehaviour
     public void OnPlayerHitEffect()
     {
         canvasGroup.alpha = 1.0f;
-        DOTween.To(() => canvasGroup.alpha, (v) => canvasGroup.alpha = v, 0, 0.3f).OnStart(() => canvasGroup.alpha = 1.0f);
+        DOTween.To(() => canvasGroup.alpha, (v) => canvasGroup.alpha = v, 0, 0.3f).OnStart(() => canvasGroup.alpha = 1.0f).SetUpdate(true);
     }
 }

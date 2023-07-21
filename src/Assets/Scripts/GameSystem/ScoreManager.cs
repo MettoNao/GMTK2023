@@ -7,20 +7,25 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText, comboText;
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] PlayerCore player;
 
     int combo;
     int score;
     public void AddScore(int add)
     {
+        if (player.GetIsDeath || score >= 999999999) return;
+
         int old = score;
         int updateScore = score;
         score += add * (combo + 1);
 
-        DOTween.To(() => old, (s) => updateScore = s, score, 0.3f).OnUpdate(() => scoreText.text = updateScore.ToString().PadLeft(6, '0'));
+        DOTween.To(() => old, (s) => updateScore = s, score, 0.3f).OnUpdate(() => scoreText.text = updateScore.ToString().PadLeft(9, '0'));
     }
 
     public void AddCombo()
     {
+        if (player.GetIsDeath || score >= 999999999) return;
+
         timer = interval;
         combo++;
         if (combo <= 1) return;

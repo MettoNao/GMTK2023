@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519836bed730e4e6b8ff8cdb34df1e65, type: 3}
+  m_Name: LevelData 4
+  m_EditorClassIdentifier: 
+  id: 1
+  elapsedTime: 90
+  enemies:
+  - {fileID: 8776045650499775075, guid: de5455a5681104e7e98bca32996611c3, type: 3}
+  - {fileID: 8776045650499775075, guid: 07913fe252f0b42e58350f2cdd6d437c, type: 3}
+  minSpawnInterval: 2
+  maxSpawnInterval: 3
+  minAttackInterval: 0.2
+  maxAttackInterval: 0.3
+  enemySpawnCount: 4
+  enemyAttackCount: 5

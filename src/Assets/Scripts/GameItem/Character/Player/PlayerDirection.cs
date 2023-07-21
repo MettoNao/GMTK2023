@@ -6,10 +6,10 @@ public class PlayerDirection : MonoBehaviour
 {
     [SerializeField] private float lookSpeed;
 
-    public void Direction(Vector2 mousePos)
+    public void Direction(Vector2 dir, bool isGamePad)
     {
-        var pos = Camera.main.WorldToScreenPoint(transform.position);
-        var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - pos);
+        var pos = isGamePad ? Vector2.zero : (Vector2)Camera.main.WorldToScreenPoint(transform.position);
+        var rotation = Quaternion.LookRotation(Vector3.forward, dir - pos);
         transform.rotation = rotation;
     }
 }

@@ -10,10 +10,17 @@ public class ExclamationScript : MonoBehaviour
 
     public void ShowExclamation()
     {
+        img.gameObject.SetActive(true);
         isExclamation = true;
         img.transform.localScale = new Vector3(1, 0, 1);
         img.alpha = 1.0f;
         img.transform.DOScaleY(1.2f, 0.3f).SetEase(Ease.OutBounce).OnComplete(() => DOTween.To(() => img.alpha, (v) => img.alpha = v, 0, 0.3f).SetDelay(1.0f).OnComplete(() => isExclamation = false));
+    }
+
+    public void Init()
+    {
+        isExclamation = false;
+        img.gameObject.SetActive(false);
     }
 
     private void Update()

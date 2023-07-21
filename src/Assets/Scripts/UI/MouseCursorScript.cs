@@ -10,9 +10,8 @@ public class MouseCursorScript : MonoBehaviour
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void setMouseCursorPosition(Vector2 pos)
     {
-        transform.position = Input.mousePosition;
+        transform.position = pos;
     }
 }

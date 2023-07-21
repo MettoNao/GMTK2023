@@ -17,11 +17,12 @@ public class PlayerCore : MonoBehaviour, IReciveDamage
     [SerializeField] PlayerSpecialShooter specialShooter;
     [SerializeField] GameObject body, effect;
     [SerializeField] GameManager gameManager;
+    [SerializeField] MouseCursorScript mouseCursorScript;
     private Vector3 movement;
 
     PlayerInput playerInput;
 
-    private InputAction FireAction, FireAction1;
+    private InputAction FireAction, FireAction1, Look, PadLook;
 
     private int maxHp = 3;
     private int hp;
@@ -38,6 +39,8 @@ public class PlayerCore : MonoBehaviour, IReciveDamage
         playerInput = GetComponent<PlayerInput>();
         FireAction = playerInput.currentActionMap["Fire"];
         FireAction1 = playerInput.currentActionMap["Fire1"];
+        Look = playerInput.currentActionMap["Look"];
+        PadLook = playerInput.currentActionMap["PadLook"];
 
         hp = maxHp;
     }
@@ -56,6 +59,8 @@ public class PlayerCore : MonoBehaviour, IReciveDamage
 
     float timer = 0;
     float interval = 0.5f;
+    bool pad;
+    Vector2 oldMousePos;
     private void Update()
     {
         if (isDeath == true) return;
@@ -76,8 +81,21 @@ public class PlayerCore : MonoBehaviour, IReciveDamage
             specialShooter.Shoot();
         }
 
-        direction.Direction(Input.mousePosition);
+        Vector2 mousePos = Look.ReadValue<Vector2>();
+        Vector2 padDir = PadLook.ReadValue<Vector2>();
+
+        if (oldMousePos != mousePos || (oldMousePos == mousePos && padDir.magnitude != 0))
+        {
+            direction.Direction(oldMousePos != mousePos ? mousePos : padDir, oldMousePos == mousePos);
+
+            var corsorPos = oldMousePos == mousePos ? (Vector2)Camera.main.WorldToScreenPoint((Vector2)transform.position + padDir.normalized * 5) : mousePos;
+            mouseCursorScript.setMouseCursorPosition(corsorPos);
+        }
+
+        oldMousePos = mousePos;
     }
+
+
 
     private void FixedUpdate()
     {

@@ -5,13 +5,24 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.SceneManagement;
 using KanKikuchi.AudioManager;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 public class GameOverMenuScript : MonoBehaviour
 {
+    [SerializeField] Button firstControls;
     [SerializeField] private CanvasGroup canvasGroup, fade;
-    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI scoreText, scoreText2;
 
     public void InitMenu(int score)
     {
+
+        if (Gamepad.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            firstControls.Select();
+        }
+
         Cursor.visible = true;
         scoreText.text = "SCORE:" + score.ToString();
         canvasGroup.blocksRaycasts = true;

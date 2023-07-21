@@ -39,6 +39,7 @@ public class EnemyCore : MonoBehaviour, IReciveDamage
 
     public void Init()
     {
+        exclamationScript.Init();
         SetAlly(false);
         col.enabled = false;
         body.SetActive(false);
